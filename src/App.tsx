@@ -45,7 +45,7 @@ export const productWithUserAndCategory: ProductWithUserAndCategory[]
  }));
 
 export const App: React.FC = () => {
-  const [preparedPoducts, setpreparedPoducts]
+  const [preparedPoducts]
   = useState<ProductWithUserAndCategory[]>(productWithUserAndCategory);
   const [query, setQuery] = useState('');
   const [person, setPerson] = useState('');
@@ -59,23 +59,23 @@ export const App: React.FC = () => {
 
   const resetFilter = () => (setQuery(''));
 
-  const doesNameMatch = (product: any) => {
+  const doesNameMatch = (product: ProductWithUserAndCategory) => {
     switch (person) {
       case 'Roma':
-        return product.user.name === 'Roma';
+        return product?.user?.name === 'Roma';
       case 'Anna':
-        return product.user.name === 'Anna';
+        return product?.user?.name === 'Anna';
       case 'Max':
-        return product.user.name === 'Max';
+        return product?.user?.name === 'Max';
       case 'John':
-        return product.user.name === 'John';
+        return product?.user?.name === 'John';
 
       default:
-        return '';
+        return preparedPoducts;
     }
   };
 
-  const doesTitleMatch = (product: any) => (product.name
+  const doesTitleMatch = (product: ProductWithUserAndCategory) => (product.name
     .toLowerCase().includes(query.toLowerCase().trim()));
 
   const veryVisible = preparedPoducts
